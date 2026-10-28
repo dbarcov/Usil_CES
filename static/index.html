@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Umbral · Aceptación social de la IA en Perú</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+:root{--bg:#eceff4;--pn:#fff;--ink:#0f172a;--mut:#64748b;--ln:#cbd5e1;--ac:#1d4ed8;--ok:#047857;--no:#c2410c;--mono:'IBM Plex Mono',monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 'IBM Plex Sans',sans-serif;
+ background-image:linear-gradient(#dfe4ec 1px,transparent 1px),linear-gradient(90deg,#dfe4ec 1px,transparent 1px);background-size:32px 32px}
+.shell{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+aside{position:sticky;top:0;height:100vh;background:#0f172a;color:#cbd5e1;padding:26px 20px;display:flex;flex-direction:column}
+aside h1{font:600 1.35rem var(--mono);color:#fff;margin:0}aside h1 i{color:#60a5fa;font-style:normal}
+aside small{font:.68rem var(--mono);color:#64748b;letter-spacing:.1em}
+aside nav{margin:34px 0;display:flex;flex-direction:column;gap:2px}
+aside a{color:#94a3b8;text-decoration:none;font-size:.88rem;padding:9px 10px;border-left:2px solid transparent}
+aside a span{font:.7rem var(--mono);color:#60a5fa;margin-right:10px}aside a:hover{background:#1e293b;color:#fff;border-color:#60a5fa}
+.st{margin-top:auto;font:.7rem/1.7 var(--mono);color:#64748b;border-top:1px solid #1e293b;padding-top:14px}.st b{color:#34d399;font-weight:500}
+main{padding:0 clamp(18px,4vw,56px) 40px;min-width:0}
+.top{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--ln);font:.74rem var(--mono);color:var(--mut)}
+section{padding:46px 0 10px}
+.tag{font:600 .72rem var(--mono);color:var(--ac);letter-spacing:.12em}
+h2{font-size:1.7rem;margin:4px 0 6px;letter-spacing:-.01em}.lead{color:var(--mut);max-width:700px;margin:0 0 22px}
+.hero h2{font-size:clamp(1.9rem,4vw,3rem);line-height:1.1;max-width:900px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));border:1px solid var(--ln);background:var(--pn);margin-top:26px}
+.kpi{padding:16px 18px;border-right:1px solid var(--ln)}.kpi:last-child{border:0}
+.kpi span{font:.68rem var(--mono);color:var(--mut);text-transform:uppercase;letter-spacing:.1em}.kpi b{display:block;font:600 1.9rem var(--mono)}
+.pn{background:var(--pn);border:1px solid var(--ln)}.pn>h3{margin:0;padding:10px 16px;font:600 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--ln);background:#f8fafc;color:var(--mut)}
+.pb{padding:18px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.g4{display:grid;grid-template-columns:repeat(3,1fr)}
+@media(max-width:1000px){.shell{display:block}aside{position:static;height:auto}aside nav{flex-direction:row;flex-wrap:wrap;margin:14px 0}.st{display:none}.g2,.g3{grid-template-columns:1fr!important}.g4{grid-template-columns:1fr 1fr}}
+.sl{margin-bottom:15px}.sl label{display:flex;justify-content:space-between;font-size:.86rem;gap:10px}.sl label b{font:600 .95rem var(--mono);color:var(--ac)}
+input[type=range]{width:100%;accent-color:var(--ac)}
+select{font:inherit;padding:5px 8px;border:1px solid var(--ln);background:#fff}
+.big{font:600 3.6rem/1 var(--mono)}.vd{font-weight:600;font-size:1.1rem;margin:4px 0}
+.bar{height:8px;background:#e2e8f0;margin:10px 0}.bar i{display:block;height:100%;background:var(--ok);transition:width .35s}
+.row{display:grid;grid-template-columns:130px 1fr 52px;gap:10px;align-items:center;font-size:.78rem;margin:6px 0}.row em{font:normal .75rem var(--mono);text-align:right}
+.ct{display:grid;grid-template-columns:190px 1fr;gap:10px;align-items:center;font-size:.76rem;margin:5px 0}
+.ct .t{position:relative;height:12px;background:linear-gradient(#94a3b8,#94a3b8) center/1px 100% no-repeat}.ct .t i{position:absolute;top:0;height:100%}
+.m{padding:14px 16px;border-right:1px solid var(--ln)}.m:last-child{border:0}.m span{font:.66rem var(--mono);color:var(--mut);text-transform:uppercase;letter-spacing:.08em;display:block}.m b{font:600 1.6rem var(--mono)}.m small{display:block;color:var(--mut);font-size:.72rem}
+.lect{font:.86rem/1.7 var(--mono);background:#0f172a;color:#e2e8f0;padding:16px 18px;border-left:3px solid #60a5fa;margin-top:0}
+table{width:100%;border-collapse:collapse;font-size:.88rem}th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--ln)}th{font:.68rem var(--mono);text-transform:uppercase;color:var(--mut);letter-spacing:.1em;background:#f8fafc}
+td.n{font-family:var(--mono)}tr.best td{background:#eff6ff;font-weight:600}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.cm{display:grid;grid-template-columns:62px 1fr 1fr;gap:3px;font:.68rem var(--mono);text-align:center;align-items:center;color:var(--mut)}.cm div{padding:22px 4px;font:600 1.3rem var(--mono);color:#fff}
+.note{border-left:3px solid var(--ac);background:#fff;padding:10px 16px;color:var(--mut);font-size:.88rem;margin-top:18px}
+ul{margin:0;padding-left:18px}li{margin:7px 0}
+.thx{margin-top:50px;border-top:1px solid var(--ln);padding-top:26px;text-align:center}.thx p{max-width:640px;margin:8px auto}.thx b{display:block;font-size:1.1rem}
+footer{margin-top:26px;font:.74rem/1.8 var(--mono);color:var(--mut);text-align:center}
+.rd{font-size:.78rem;line-height:1.65;padding:13px 16px;border-top:1px solid var(--ln)}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside>
+  <h1>UMBRAL<i>_</i></h1><small>CLASIFICACIÓN DE RIESGOS · IA</small>
+  <nav><a href="#resumen"><span>M00</span>Resumen</a><a href="#simulador"><span>M01</span>Simulador</a><a href="#eda"><span>M02</span>Exploración</a><a href="#modelos"><span>M03</span>Modelos</a><a href="#explica"><span>M04</span>Explicabilidad</a><a href="#metodo"><span>M05</span>Metodología</a></nav>
+  <div class="st"><b>● MODELOS ENTRENADOS</b><br>FUENTE: ENPSCyT 2024<br>VD: P36 · VI: P37 (6 ítems)</div>
+</aside>
+<main>
+<div class="top"><span>UMBRAL / PANEL DE ANÁLISIS</span><span>ENPSCyT 2024 · PERÚ</span></div>
+
+<section id="resumen" class="hero">
+  <div class="tag">SISTEMA INTELIGENTE · CIENCIA DE DATOS</div>
+  <h2>Sistema inteligente de clasificación de riesgos para predecir la aceptación social de la inteligencia artificial en Perú</h2>
+  <div class="kpis" id="kpis"></div>
+</section>
+
+<section id="simulador">
+  <div class="tag">M01 · SIMULADOR</div><h2>Perfil de riesgo percibido</h2>
+  <p class="lead">Cada cambio ejecuta el análisis completo: predicción de los tres modelos, comparación con la población encuestada y lectura de ciencia de datos.</p>
+  <div class="g2" style="margin-top:0">
+    <div class="pn"><h3>Entradas · P37 (1 = nada de acuerdo, 10 = totalmente)</h3><div class="pb" id="sliders"></div></div>
+    <div class="pn"><h3>Salida del sistema</h3><div class="pb">
+      <div class="big" id="prob">–</div><div class="vd" id="verdict"></div><div class="bar"><i id="pbar" style="width:0"></i></div>
+      <div style="font-size:.82rem;color:var(--mut);margin-bottom:12px">Modelo principal: <select id="model"></select></div>
+      <div id="mp"></div></div></div>
+  </div>
+  <div class="pn" style="margin-top:18px"><h3>Análisis de ciencia de datos de esta simulación</h3>
+    <div class="g4" style="border-bottom:1px solid var(--ln)" id="kp"></div>
+    <div class="pb"><div style="font:600 .72rem var(--mono);color:var(--mut);margin-bottom:6px">CONTRIBUCIÓN DE CADA VARIABLE (XGBoost · log-odds)</div><div id="contribs"></div></div>
+    <div class="lect" id="lectura"></div>
+  </div>
+</section>
+
+<section id="eda">
+  <div class="tag">M02 · EXPLORACIÓN</div><h2>Entender los datos antes de modelar</h2>
+  <p class="lead">Respuestas originales, relación entre preguntas y diferencias entre quienes aceptan y rechazan la IA.</p>
+  <div class="g2" style="margin-top:0"><div class="pn"><div id="eda1"></div><div class="lect rd" id="t-eda1"></div></div><div class="pn"><div id="eda2"></div><div class="lect rd" id="t-eda2"></div></div></div>
+  <div class="pn" style="margin-top:18px"><div id="eda3"></div><div class="lect rd" id="t-eda3"></div></div>
+</section>
+
+<section id="modelos">
+  <div class="tag">M03 · EVALUACIÓN</div><h2>SVM, Random Forest y XGBoost</h2>
+  <p class="lead">Variables: 6 ítems P37 + índice de riesgo. Prueba reservada del 25 %. Métrica principal: F1-macro.</p>
+  <div class="pn" style="overflow:auto"><table id="tbl"></table><div class="lect rd" id="t-table"></div></div>
+  <div class="g3" id="cms"></div>
+  <p class="note">El modelo acierta más en “Aceptación” (clase mayoritaria) que en “Rechazo”; por eso se usa F1-macro, que pondera ambas clases por igual.</p>
+</section>
+
+<section id="explica">
+  <div class="tag">M04 · EXPLICABILIDAD</div><h2>Qué variables pesan más</h2>
+  <p class="lead">Impacto medio de cada variable en la salida de XGBoost (contribuciones tipo SHAP).</p>
+  <div class="pn"><div id="shap"></div><div class="lect rd" id="t-shap"></div></div>
+</section>
+
+<section id="metodo">
+  <div class="tag">M05 · METODOLOGÍA</div><h2>Datos y alcance</h2>
+  <div class="g2" style="margin-top:0"><div class="pn"><div class="pb"><ul>
+    <li><b>Fuente:</b> Encuesta Nacional de Percepción Social de la Ciencia y Tecnología (ENPSCyT) 2024.</li>
+    <li><b>Variable dependiente (P36):</b> Positivos/Muy positivos = aceptación; Negativos/Muy negativos = rechazo. Se excluyen “No sabe / No contesta”.</li>
+    <li><b>Entradas (P37.2, 37.5, 37.9, 37.12, 37.14, 37.16):</b> escala 1–10; faltantes imputados con la mediana; índice de riesgo = promedio de los seis ítems.</li>
+  </ul></div></div><div class="pn"><div class="pb"><ul>
+    <li><b>Modelos:</b> SVM (RBF, escalado), Random Forest y XGBoost; partición 75/25 estratificada, random_state = 42.</li>
+    <li><b>Métricas:</b> F1-macro y matriz de confusión.</li>
+    <li><b>Limitaciones:</b> clases desbalanceadas, corte transversal, solo 6 predictores, una única partición y sin ajuste de hiperparámetros.</li>
+  </ul></div></div></div>
+</section>
+
+<div class="thx">
+  <div class="tag">AGRADECIMIENTOS</div>
+  <p>Se expresa un sincero agradecimiento al docente por su orientación académica y metodológica durante el desarrollo de este trabajo.</p>
+  <b>Erick Giovanny Flores Chacón</b>
+</div>
+<footer>Autores: Diogo Barco Valencia · Brayan Huaman Chavez<br>Umbral · ENPSCyT 2024</footer>
+</main></div>
+
+<script>
+const $=s=>document.querySelector(s);let S,vals=[];
+const lay={paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',font:{family:'IBM Plex Sans',color:'#0f172a',size:12},margin:{t:44,l:55,r:15,b:50}};
+const cfg={displayModeBar:false,responsive:true};
+async function init(){
+  S=await (await fetch('/api/summary')).json();
+  $('#kpis').innerHTML=[['Encuestados útiles',S.n.toLocaleString()],['Aceptación',Math.round(S.acept/S.n*100)+'%'],['Mejor modelo',S.best],['F1-macro',S.models[S.best].f1]].map(a=>`<div class="kpi"><span>${a[0]}</span><b>${a[1]}</b></div>`).join('');
+  vals=S.items.map(()=>5);
+  $('#sliders').innerHTML=S.items.map((t,i)=>`<div class="sl"><label>${t}<b id="v${i}">5</b></label><input type="range" min="1" max="10" value="5" data-i="${i}"></div>`).join('');
+  document.querySelectorAll('input[type=range]').forEach(r=>r.oninput=e=>{const i=e.target.dataset.i;vals[i]=+e.target.value;$('#v'+i).textContent=e.target.value;predict()});
+  $('#model').innerHTML=Object.keys(S.models).map(m=>`<option ${m==S.best?'selected':''}>${m}</option>`).join('');
+  $('#model').onchange=predict;
+  tables();charts();predict();
+  for(const k of ['eda1','eda2','eda3','table','shap'])$('#t-'+k).textContent='> '+S.texts[k];
+}
+async function predict(){
+  const r=await (await fetch('/api/predict',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({values:vals,model:$('#model').value})})).json();
+  const p=Math.round(r.prob*100),ok=r.prob>=.5;
+  $('#prob').textContent=p+'%';$('#pbar').style.width=p+'%';
+  $('#verdict').textContent=ok?'Tiende a aceptar la IA':'Tiende a rechazar la IA';$('#verdict').style.color=ok?'var(--ok)':'var(--no)';
+  $('#mp').innerHTML=Object.entries(r.probs).map(([n,v])=>`<div class="row"><span>${n}</span><div class="bar" style="margin:0"><i style="width:${v*100}%"></i></div><em>${(v*100).toFixed(0)}%</em></div>`).join('');
+  $('#kp').innerHTML=[['Percentil del índice',r.pct.toFixed(0)+'°','índice '+r.indice.toFixed(2)],['Consenso',r.agree+'/3','modelos coinciden'],['Margen',r.margin.toFixed(0)+' pts','respecto al umbral 50%']]
+    .map(a=>`<div class="m"><span>${a[0]}</span><b>${a[1]}</b><small>${a[2]}</small></div>`).join('');
+  const mx=Math.max(...r.contribs.map(Math.abs),.01);
+  $('#contribs').innerHTML=r.contribs.map((c,i)=>`<div class="ct"><span>${S.labels[i]}</span><div class="t"><i style="${c>=0?'left':'right'}:50%;width:${Math.abs(c)/mx*50}%;background:${c>=0?'var(--ok)':'var(--no)'}"></i></div></div>`).join('')+'<div style="font-size:.72rem;color:var(--mut);margin-top:6px">Verde: favorece aceptación · Naranja: favorece rechazo. No implica causalidad.</div>';
+  $('#lectura').textContent='> '+r.lectura;
+}
+function tables(){
+  $('#tbl').innerHTML='<tr><th>Modelo</th><th>F1-macro</th><th>F1 Rechazo</th><th>F1 Aceptación</th><th>Recall Rechazo</th><th>Recall Aceptación</th></tr>'+
+   Object.entries(S.models).map(([n,m])=>`<tr class="${n==S.best?'best':''}"><td>${n}</td><td class="n">${m.f1}</td><td class="n">${m.rep.Rechazo['f1-score']}</td><td class="n">${m.rep['Aceptación']['f1-score']}</td><td class="n">${m.rep.Rechazo.recall}</td><td class="n">${m.rep['Aceptación'].recall}</td></tr>`).join('');
+  $('#cms').innerHTML=Object.entries(S.models).map(([n,m])=>{
+    const mx=Math.max(...m.cm.flat());const c=(v,k)=>`<div style="background:${k?'rgba(29,78,216,':'rgba(194,65,12,'}${.35+.65*v/mx})">${v}</div>`;
+    return `<div class="pn"><h3>${n} · F1-macro ${m.f1}</h3><div class="pb"><div class="cm"><span></span><span>Pred. Rechazo</span><span>Pred. Acept.</span>
+    <span>Real Rechazo</span>${c(m.cm[0][0],1)}${c(m.cm[0][1],0)}<span>Real Acept.</span>${c(m.cm[1][0],0)}${c(m.cm[1][1],1)}</div></div><div class="lect rd">&gt; ${S.texts.cm[n]}</div></div>`}).join('');
+}
+function charts(){
+  const sh=['Amenaza','Más daños','Dominio máq.','Más problemas','Divisiones','Privacidad','Índice'],r=Object.entries(S.raw),lb=sh.concat(['Aceptación']);
+  Plotly.newPlot('eda1',[{x:r.map(a=>a[0]),y:r.map(a=>a[1]),type:'bar',text:r.map(a=>a[1]),textposition:'outside',cliponaxis:false,marker:{color:r.map(a=>({'Positivos':'#1d4ed8','Muy positivos':'#1d4ed8','Negativos':'#c2410c','Muy negativos':'#c2410c'}[a[0]]||'#94a3b8'))}}],{...lay,title:{text:'Respuestas originales (P36)',font:{size:13}},yaxis:{title:'Personas'}},cfg);
+  Plotly.newPlot('eda2',[{z:S.corr,x:lb,y:lb,type:'heatmap',zmin:-1,zmax:1,colorscale:[[0,'#c2410c'],[.5,'#f8fafc'],[1,'#1d4ed8']],text:S.corr,texttemplate:'%{text}',textfont:{size:10}}],{...lay,title:{text:'Matriz de correlaciones',font:{size:13}},margin:{t:44,l:95,r:10,b:90},yaxis:{autorange:'reversed'}},cfg);
+  Plotly.newPlot('eda3',[{x:sh,y:S.means[0],type:'bar',name:'Rechazo',marker:{color:'#c2410c'}},{x:sh,y:S.means[1],type:'bar',name:'Aceptación',marker:{color:'#1d4ed8'}}],{...lay,title:{text:'Acuerdo promedio (1–10) según clase',font:{size:13}},barmode:'group',legend:{orientation:'h',y:-.25}},cfg);
+  const o=S.shap.map((v,i)=>[v,S.labels[i]]).sort((a,b)=>a[0]-b[0]);
+  Plotly.newPlot('shap',[{x:o.map(a=>a[0]),y:o.map(a=>a[1]),type:'bar',orientation:'h',marker:{color:'#1d4ed8'}}],{...lay,margin:{t:20,l:330,r:20,b:45},xaxis:{title:'Impacto medio absoluto'}},cfg);
+}
+init();
+</script>
+</body>
+</html>
